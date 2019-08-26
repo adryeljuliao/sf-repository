@@ -6,6 +6,10 @@
 	font-size: 14px;
 }
 
+body {
+	padding-top: 4.5rem;
+}
+
 .login-container {
 	display: flex;
 	height: 100vh;
@@ -41,6 +45,7 @@
 	color: #0071ea;
 	border-radius: 4px;
 }
+
 .login-container form button:hover {
 	background: #0071ea;
 	border: 1px solid #0071ea;
@@ -52,14 +57,9 @@
 	color: #fff;
 }
 
-.menu {
-	grid-area: menu;
-	background: #999;
-}
-
-.content {
+/* .content {
 	grid-area: content;
-	background: lime;
+	background: #f5f5f5;
 }
 
 .footer {
@@ -67,16 +67,144 @@
 	background: red;
 }
 
-.logo {
-	grid-area: logo;
-	background: blue;
-}
-
 .app-container {
 	margin: 0px;
 	display: grid;
 	grid-template-columns: 225px 1fr;
-	grid-template-rows: 100px 1fr 40px;
-	grid-template-areas: "menu header" "menu content" "menu footer";
+	grid-template-rows: 65px 1fr 40px;
+	grid-template-areas: "header header" "content content" "footer footer";
 	height: 100vh;
+}
+
+.header {
+	display: block;
+	background: #666;
+	grid-area: header;
+} */
+.navbar-custom {
+	padding: 20px !important;
+	background-color: #24292e !important;
+}
+
+/* .navbar-toggler {
+  background-color: #fff !important;
+} */
+.custom-toggler .navbar-toggler-icon {
+	background-image:
+		url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(237,237,237, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+@media ( max-width : 991px) {
+	.navbar-collapse {
+		margin-top: 5px;
+	}
+	.navbar-collapse li {
+		padding: 10px 0 !important;
+		border-bottom: 0.1rem solid rgba(237, 237, 237, 0.5);
+	}
+}
+
+.navbar-collapse li {
+	padding: 0 10px;
+}
+
+.custom-toggler.navbar-toggler {
+	border-color: rgb(237, 237, 237);
+}
+
+.navbar-custom .navbar-nav li a {
+	text-decoration: none;
+	color: #fff;
+	padding: 3px 0;
+	font-weight: bold;
+	outline: none;
+}
+
+.navbar-custom .navbar-nav li a:hover {
+	color: #d9d9d9;
+}
+
+.card-text {
+	font-size: 12px;
+	color: #666;
+	margin: 0 10px;
+}
+
+.card-body {
+	padding: 10px !important;
+}
+
+.user-name-labels {
+	font-weight: bold;
+	padding: 5px 25px;
+}
+
+.user-name-labels .name {
+	font-size: 25px;
+	font-weight: bold;
+	display: block;
+}
+
+.tabs-custom {
+	padding: 0 !important;
+	margin: 0 !important;
+	border: none !important;
+}
+
+.tabs-custom ul {
+	padding: 0 !important;
+	margin: 0 !important;
+	border: none !important;
+	background: transparent !important;
+	border-bottom: 1px solid #d3d7cf !important;
+}
+
+.tabs-custom ul li {
+	padding: 0 !important;
+	margin: 0 3px !important;
+	border: none !important;
+	border-bottom: none !important;
+	background: #fff !important;
+	
+}
+
+.tabs-custom ul li a {
+	color: #666 !important;
+}
+
+.ui-tabs-nav .ui-state-hover {
+	border-bottom: 2px solid #666 !important;
+}
+
+.ui-tabs-nav .ui-state-hover a {
+	color: #666 !important;
+}
+
+.tabs-custom ul li[aria-selected="true"]:hover {
+	border-bottom: none !important;
+	color: #000 !important;
+	font-weight: bold !important;
+}
+
+
+.tabs-custom ul li[aria-selected="true"] a {
+	color: #000 !important;
+	font-weight: bold !important;
+}
+
+.tabs-custom ul li[aria-selected="true"] a:hover {
+	color: #000 !important;
+	font-weight: bold !important;
+}
+
+.tabs-custom ul li a {
+	padding: 16px 8px !important;
+	font-weight: normal;
+}
+
+.ui-state-active a {
+	color: #000 !important;
+	font-weight: bold !important;
+	border-bottom: 2px solid #e36209;
+	cursor: pointer !important;
 }

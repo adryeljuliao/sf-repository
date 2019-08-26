@@ -6,26 +6,42 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
+
 	<h:outputStylesheet name="css/styles.css" />
+	<h:outputStylesheet name="bootstrap/css/bootstrap.min.css" />
+	<h:outputStylesheet name="font-awesome/css/font-awesome.css" />
+
 </h:head>
 <body>
-	<div class="app-container">
-		<div class="header">header</div>
-		<div class="menu">
-			<ui:insert name="menu">
-				menu
-			</ui:insert>
+	<div>
+		<nav class="navbar navbar-expand-lg fixed-top navbar-custom">
+		<div class="container-fluid" style="padding: 0 25px;">
+			<button class="navbar-toggler custom-toggler" type="button"
+				data-toggle="collapse" data-target="#navbarNav"
+				aria-controls="navbarNav" aria-expanded="false"
+				aria-label="Alterna navegação">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="nav navbar-nav ml-auto">
+					<li><a href="#"><span class="fa fa-sign-out fa-lg" />Sair</a></li>
+				</ul>
+			</div>
 		</div>
-		<div class="content">
+		</nav>
+		<div class="content container-fluid">
 			<ui:insert name="content">
 				conteudo
 			</ui:insert>
 		</div>
 		<div class="footer">
 			<ui:insert name="footer">
-				footer
 			</ui:insert>
 		</div>
 	</div>
+	<script src="#{request.contextPath}/resources/jquery/jquery.min.js"></script>
+	<script src="#{request.contextPath}/resources/popper/popper.min.js"></script>
+	<script
+		src="#{request.contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
