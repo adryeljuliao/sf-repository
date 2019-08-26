@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,9 +48,15 @@ public class UsuarioControlador {
 			usuario = usuarioDto.transformarObjeto(jsonObj);
 			usuarioService.salvar(usuario);
 		}
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(usuario.getId())
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(usuario.getIdGithub())
 				.toUri();
 
 		return ResponseEntity.created(uri).build();
+	}
+
+	@GetMapping(value = "/usuarios/{id}")
+	public ResponseEntity<?> buscarUsuario(@PathVariable Long id) {
+		
+		return null;
 	}
 }
