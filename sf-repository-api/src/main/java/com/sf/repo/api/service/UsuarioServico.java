@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.sf.repo.api.model.Usuario;
 import com.sf.repo.api.repository.UsuarioRepositorio;
+import com.sf.repo.api.service.exception.ObjectNotFoundException;
+
 
 @Service
 public class UsuarioServico {
@@ -23,5 +25,10 @@ public class UsuarioServico {
 	
 	public Usuario buscarPorIdGithub(Long id) {
 		return usuarioRepositorio.findByIdGithub(id).orElse(null);
+	}
+	public Usuario buscarPorId(Long id) {
+		return usuarioRepositorio.findById(id).orElseThrow(
+				() -> new ObjectNotFoundException("Objeto não encontrado: " + id
+						+ ", Tipo: " + Usuario.class.getName()));
 	}
 }
