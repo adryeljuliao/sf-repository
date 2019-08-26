@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity(name = "repositorio")
 @Table(name = "tb_repositorio")
 public class Repositorio implements Serializable {
@@ -22,6 +24,7 @@ public class Repositorio implements Serializable {
 	private String nomeRepositorio;
 	private String urlRepositorio;
 	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;

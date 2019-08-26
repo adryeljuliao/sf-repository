@@ -2,15 +2,17 @@ package com.sf.repo.bean;
 
 import java.io.Serializable;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+
 import org.primefaces.json.JSONObject;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import com.sf.repo.model.dto.UsuarioDto;
+import com.sf.repo.util.SessionContext;
 
-@Component
-@Scope("session")
+@ViewScoped
+@ManagedBean
 public class LoginBean implements Serializable {
 
 	private static final long serialVersionUID = 8946009153982006623L;
@@ -42,12 +44,13 @@ public class LoginBean implements Serializable {
 		if (!usuario.getNomeUsuario().trim().isEmpty()) {
 			RestTemplate restTemplate = new RestTemplate();
 			restTemplate.postForObject(url.toString(), usuario, UsuarioDto.class);
+			SessionContext.setValueObjOnSession("usuarioLogado", usuario);
 			limparCampo();
 			return redirecionarHome();
 		}
 		return "";
 	}
- 
+
 	public void limparCampo() {
 		usuario = new UsuarioDto();
 	}

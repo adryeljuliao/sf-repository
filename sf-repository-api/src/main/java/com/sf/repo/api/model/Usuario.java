@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 @Entity(name = "usuario")
 @Table(name = "tb_usuario")
@@ -22,7 +24,8 @@ public class Usuario implements Serializable {
 	private String jsonDados;
 	private Long idGithub;
 	private String nomeUsuario;
-	 
+	
+	@JsonManagedReference
 	@OneToMany(mappedBy = "usuario")
 	private List<Repositorio> listaRepositorios;
 
