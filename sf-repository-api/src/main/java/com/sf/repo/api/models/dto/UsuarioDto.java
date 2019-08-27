@@ -1,8 +1,8 @@
-package com.sf.repo.api.model.dto;
+package com.sf.repo.api.models.dto;
 
 import org.json.JSONObject;
 
-import com.sf.repo.api.model.Usuario;
+import com.sf.repo.api.models.Usuario;
 
 public class UsuarioDto {
 

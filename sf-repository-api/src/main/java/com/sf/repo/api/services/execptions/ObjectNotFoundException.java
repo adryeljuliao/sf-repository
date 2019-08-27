@@ -1,4 +1,4 @@
-package com.sf.repo.api.service.exception;
+package com.sf.repo.api.services.execptions;
 
 public class ObjectNotFoundException extends RuntimeException{
 

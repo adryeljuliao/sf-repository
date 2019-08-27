@@ -1,4 +1,4 @@
-package com.sf.repo.api.controller;
+package com.sf.repo.api.controllers;
 
 import java.net.URI;
 
@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.sf.repo.api.model.Usuario;
-import com.sf.repo.api.model.dto.UsuarioDto;
-import com.sf.repo.api.service.UsuarioServico;
+import com.sf.repo.api.models.Usuario;
+import com.sf.repo.api.models.dto.UsuarioDto;
+import com.sf.repo.api.services.UsuarioServico;
 
 @Controller
 @RequestMapping(path = "/login")

@@ -1,4 +1,4 @@
-package com.sf.repo.api.model;
+package com.sf.repo.api.models;
 
 import java.io.Serializable;
 import java.util.List;
