@@ -1,34 +1,20 @@
 package com.sf.repo.model.usuario;
 
 import java.io.Serializable;
+import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity(name = "usuario")
-@Table(name = "tb_usuario")
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1608589736777340771L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String jsonDados;
-	private Long idGithub;
-	private String nomeUsuario;
-	private String nomeRepositorio;
-	private String urlRepositorio;
+	private String login;
+	private String nome;
+	private String bio;
+	private String avatar;
+	private List<Repositorio> listaRepositorios;
 
 	public Usuario() {
 
-	}
-
-	public Usuario(Long idGithub, String jsonDados) {
-		this.idGithub = idGithub;
-		this.jsonDados = jsonDados;
 	}
 
 	public Long getId() {
@@ -39,43 +25,44 @@ public class Usuario implements Serializable {
 		this.id = id;
 	}
 
-	public String getNomeUsuario() {
-		return nomeUsuario;
+	public String getLogin() {
+		return login;
 	}
 
-	public void setNomeUsuario(String nomeUsuario) {
-		this.nomeUsuario = nomeUsuario;
+	public void setLogin(String login) {
+		this.login = login;
 	}
 
-	public Long getIdGithub() {
-		return idGithub;
+	public List<Repositorio> getListaRepositorios() {
+		return listaRepositorios;
 	}
 
-	public void setIdGithub(Long idGithub) {
-		this.idGithub = idGithub;
+	public void setListaRepositorios(List<Repositorio> listaRepositorios) {
+		this.listaRepositorios = listaRepositorios;
 	}
 
-	public String getUrlRepositorio() {
-		return urlRepositorio;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setUrlRepositorio(String urlRepositorio) {
-		this.urlRepositorio = urlRepositorio;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	public String getNomeRepositorio() {
-		return nomeRepositorio;
+	public String getBio() {
+		return bio;
 	}
 
-	public void setNomeRepositorio(String nomeRepositorio) {
-		this.nomeRepositorio = nomeRepositorio;
+	public void setBio(String bio) {
+		this.bio = bio;
 	}
 
-	public String getJsonDados() {
-		return jsonDados;
+	public String getAvatar() {
+		return avatar;
 	}
 
-	public void setJsonDados(String jsonDados) {
-		this.jsonDados = jsonDados;
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
 	}
+
 }

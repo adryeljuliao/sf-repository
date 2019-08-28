@@ -23,8 +23,8 @@ public class UsuarioServico {
 		log.info("Usuario salvo com sucesso");
 	}
 	
-	public Usuario buscarPorIdGithub(Long id) {
-		return usuarioRepositorio.findByIdGithub(id).orElse(null);
+	public Usuario buscarPorLogin(String login) {
+		return usuarioRepositorio.findByLogin(login).orElse(null);
 	}
 	public Usuario buscarPorId(Long id) {
 		return usuarioRepositorio.findById(id).orElseThrow(

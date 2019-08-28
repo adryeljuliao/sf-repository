@@ -18,9 +18,10 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.sf.repo.api.models.Usuario;
 import com.sf.repo.api.models.dto.UsuarioDto;
 import com.sf.repo.api.services.UsuarioServico;
+import com.sf.repo.api.services.execptions.ObjectNotFoundException;
 
 @Controller
-@RequestMapping(path = "/login")
+@RequestMapping(path = "/")
 public class UsuarioControlador {
 
 	@Autowired
@@ -31,8 +32,8 @@ public class UsuarioControlador {
 		return "rest deu certeeo";
 	}
 
-	@PostMapping
-	public ResponseEntity<Void> logar(@RequestBody UsuarioDto usuarioDto) {
+	@PostMapping(path = "/login")
+	public ResponseEntity<Void> logar(@RequestBody UsuarioDto usuarioDto) throws ObjectNotFoundException {
 
 		RestTemplate restTemplate = new RestTemplate();
 		StringBuilder urlGithub = new StringBuilder("https://api.github.com/users");
@@ -43,20 +44,23 @@ public class UsuarioControlador {
 		String dadosUsuario = restTemplate.getForObject(urlGithub.toString(), String.class);
 		JSONObject jsonObj = new JSONObject(dadosUsuario);
 
-		Usuario usuario = usuarioService.buscarPorIdGithub(jsonObj.getLong("id"));
+		Usuario usuario = usuarioService.buscarPorLogin(jsonObj.getString("login"));
 		if (usuario == null) {
 			usuario = usuarioDto.transformarObjeto(jsonObj);
 			usuarioService.salvar(usuario);
 		}
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(usuario.getIdGithub())
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{login}").buildAndExpand(usuario.getLogin())
 				.toUri();
 
 		return ResponseEntity.created(uri).build();
 	}
 
-	@GetMapping(value = "/usuarios/{id}")
-	public ResponseEntity<?> buscarUsuario(@PathVariable Long id) {
-		
-		return null;
+	@GetMapping(value = "/usuarios/{username}")
+	public ResponseEntity<?> buscarUsuario(@PathVariable String username) {
+		Usuario usuario = usuarioService.buscarPorLogin(username);
+		if(usuario == null) {
+			return ResponseEntity.badRequest().body("Usuário " + username + " não encontrado");
+		}
+		return ResponseEntity.ok().body(usuario);
 	}
 }

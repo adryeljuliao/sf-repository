@@ -12,7 +12,6 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-
 @Entity(name = "usuario")
 @Table(name = "tb_usuario")
 public class Usuario implements Serializable {
@@ -21,21 +20,16 @@ public class Usuario implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String jsonDados;
-	private Long idGithub;
-	private String nomeUsuario;
-	
+	private String login;
+	private String nome;
+	private String bio;
+	private String avatar;
 	@JsonManagedReference
 	@OneToMany(mappedBy = "usuario")
 	private List<Repositorio> listaRepositorios;
 
 	public Usuario() {
 
-	}
-
-	public Usuario(Long idGithub, String jsonDados) {
-		this.idGithub = idGithub;
-		this.jsonDados = jsonDados;
 	}
 
 	public Long getId() {
@@ -46,28 +40,12 @@ public class Usuario implements Serializable {
 		this.id = id;
 	}
 
-	public String getNomeUsuario() {
-		return nomeUsuario;
+	public String getLogin() {
+		return login;
 	}
 
-	public void setNomeUsuario(String nomeUsuario) {
-		this.nomeUsuario = nomeUsuario;
-	}
-
-	public Long getIdGithub() {
-		return idGithub;
-	}
-
-	public void setIdGithub(Long idGithub) {
-		this.idGithub = idGithub;
-	}
-
-	public String getJsonDados() {
-		return jsonDados;
-	}
-
-	public void setJsonDados(String jsonDados) {
-		this.jsonDados = jsonDados;
+	public void setLogin(String login) {
+		this.login = login;
 	}
 
 	public List<Repositorio> getListaRepositorios() {
@@ -78,12 +56,35 @@ public class Usuario implements Serializable {
 		this.listaRepositorios = listaRepositorios;
 	}
 
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getBio() {
+		return bio;
+	}
+
+	public void setBio(String bio) {
+		this.bio = bio;
+	}
+	
+	public String getAvatar() {
+		return avatar;
+	}
+	
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((idGithub == null) ? 0 : idGithub.hashCode());
 		return result;
 	}
 
@@ -101,13 +102,8 @@ public class Usuario implements Serializable {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (idGithub == null) {
-			if (other.idGithub != null)
-				return false;
-		} else if (!idGithub.equals(other.idGithub))
-			return false;
 		return true;
 	}
 	
-	
+
 }

@@ -13,7 +13,7 @@
 					<div class="col-12">
 						<div class="card">
 							<img class="card-img-top"
-								src="https://avatars0.githubusercontent.com/u/30451568?v=4"
+								src="#{usuarioBean.usuario.avatar}"
 								alt="Image profile" />
 							<div class="card-body">
 								<span class="fa fa-smile-o fa-lg" />
@@ -22,8 +22,8 @@
 						</div>
 					</div>
 					<div class="user-name-labels col-12">
-						<p:outputLabel value="Nome" styleClass="name" />
-						<p:outputLabel value="username" styleClass="username" />
+						<p:outputLabel value="#{usuarioBean.usuario.nome}" styleClass="name" />
+						<p:outputLabel value="#{usuarioBean.usuario.login}" styleClass="username" />
 					</div>
 				</div>
 
