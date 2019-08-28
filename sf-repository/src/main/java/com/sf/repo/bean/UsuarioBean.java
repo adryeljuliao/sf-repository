@@ -1,7 +1,5 @@
 package com.sf.repo.bean;
 
-import java.net.URI;
-
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
