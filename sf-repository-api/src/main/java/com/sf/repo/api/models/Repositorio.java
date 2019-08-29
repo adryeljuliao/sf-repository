@@ -23,6 +23,8 @@ public class Repositorio implements Serializable {
 	private Long id;
 	private String nomeRepositorio;
 	private String urlRepositorio;
+	private String linguagem;
+	private String descricao;
 	
 	@JsonBackReference
 	@ManyToOne
@@ -62,6 +64,22 @@ public class Repositorio implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public String getDescricao() {
+		return descricao;
+	}
+	
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+	
+	public String getLinguagem() {
+		return linguagem;
+	}
+	
+	public void setLinguagem(String linguagem) {
+		this.linguagem = linguagem;
 	}
 
 	@Override

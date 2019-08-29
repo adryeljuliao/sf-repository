@@ -3,7 +3,9 @@ package com.sf.repo.api.models;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,7 +27,7 @@ public class Usuario implements Serializable {
 	private String bio;
 	private String avatar;
 	@JsonManagedReference
-	@OneToMany(mappedBy = "usuario")
+	@OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Repositorio> listaRepositorios;
 
 	public Usuario() {
@@ -80,6 +82,17 @@ public class Usuario implements Serializable {
 		this.avatar = avatar;
 	}
 
+	public void adicionarRepositorio(Repositorio repositorio) {
+		listaRepositorios.add(repositorio);
+		repositorio.setUsuario(this);
+	}
+	
+	public void removerRepositorio(Repositorio repositorio) {
+		listaRepositorios.remove(repositorio);
+		repositorio.setUsuario(null);
+	}
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

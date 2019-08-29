@@ -14,4 +14,4 @@ public class ExampleRestApiApplication {
 		SpringApplication.run(ExampleRestApiApplication.class, args);
 	}
 	
-}
+} 

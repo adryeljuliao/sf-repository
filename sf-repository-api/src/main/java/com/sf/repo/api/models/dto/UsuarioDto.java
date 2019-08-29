@@ -3,6 +3,7 @@ package com.sf.repo.api.models.dto;
 import org.json.JSONObject;
 
 import com.sf.repo.api.models.Usuario;
+import com.sf.repo.api.utils.ObjetoJson;
 
 public class UsuarioDto {
 
@@ -21,16 +22,12 @@ public class UsuarioDto {
 
 	public Usuario transformarObjeto(JSONObject jsonObj) {
 		Usuario usuario = new Usuario();
-		usuario.setLogin(tentaRecuperarObjeto(jsonObj, "login").toString());
-		usuario.setNome(tentaRecuperarObjeto(jsonObj, "name").toString());
-		usuario.setBio(tentaRecuperarObjeto(jsonObj, "bio").toString());
-		usuario.setAvatar(tentaRecuperarObjeto(jsonObj, "avatar_url").toString());
+		usuario.setLogin(ObjetoJson.tentaRecuperarObjeto(jsonObj, "login").toString());
+		usuario.setNome(ObjetoJson.tentaRecuperarObjeto(jsonObj, "name").toString());
+		usuario.setBio(ObjetoJson.tentaRecuperarObjeto(jsonObj, "bio").toString());
+		usuario.setAvatar(ObjetoJson.tentaRecuperarObjeto(jsonObj, "avatar_url").toString());
 
 		return usuario;
-	}
-
-	private Object tentaRecuperarObjeto(JSONObject jsonObj, String key) {
-		return jsonObj.has(key) ? jsonObj.opt(key) : null;
 	}
 
 }

@@ -5,10 +5,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sf.repo.api.models.Repositorio;
 import com.sf.repo.api.models.Usuario;
 import com.sf.repo.api.repositories.UsuarioRepositorio;
 import com.sf.repo.api.services.execptions.ObjectNotFoundException;
-
 
 @Service
 public class UsuarioServico {
@@ -17,18 +17,23 @@ public class UsuarioServico {
 
 	@Autowired
 	private UsuarioRepositorio usuarioRepositorio;
-	
+
 	public void salvar(Usuario usuario) {
 		usuarioRepositorio.save(usuario);
 		log.info("Usuario salvo com sucesso");
 	}
-	
+
 	public Usuario buscarPorLogin(String login) {
 		return usuarioRepositorio.findByLogin(login).orElse(null);
 	}
+
 	public Usuario buscarPorId(Long id) {
-		return usuarioRepositorio.findById(id).orElseThrow(
-				() -> new ObjectNotFoundException("Objeto não encontrado: " + id
-						+ ", Tipo: " + Usuario.class.getName()));
+		return usuarioRepositorio.findById(id).orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado: " + id + ", Tipo: " + Usuario.class.getName()));
+	}
+
+	public Usuario atualizar(Usuario usuario) {
+		buscarPorLogin(usuario.getLogin());
+		return usuarioRepositorio.save(usuario);
 	}
 }
