@@ -1,7 +1,5 @@
 package com.sf.repo.api.controllers;
 
-import java.net.URI;
-
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,10 +9,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.sf.repo.api.models.Repositorio;
 import com.sf.repo.api.models.Usuario;
+import com.sf.repo.api.models.dto.RepositorioDto;
 import com.sf.repo.api.services.UsuarioServico;
 import com.sf.repo.api.utils.ObjetoJson;
 
@@ -26,14 +24,16 @@ public class RepositorioControlador {
 	private UsuarioServico usuarioServico;
 
 	@PutMapping(value = "{login}")
-	public ResponseEntity<?> cadastrarRepositorio(@RequestBody String nomeRepositorio, @PathVariable String login) {
+	public ResponseEntity<?> cadastrarRepositorio(@RequestBody RepositorioDto repositorioDto,
+			@PathVariable String login) {
 
 		RestTemplate restTemplate = new RestTemplate();
 		StringBuilder urlGithub = new StringBuilder("https://api.github.com/repos");
 		urlGithub.append("/");
 		urlGithub.append(login);
 		urlGithub.append("/");
-		urlGithub.append(ObjetoJson.tentaRecuperarObjeto(new JSONObject(nomeRepositorio), "nomeRepositorio"));
+		urlGithub.append(
+				ObjetoJson.tentaRecuperarObjeto(new JSONObject(repositorioDto), "nomeRepositorio").toString().trim());
 
 		String dadosUsuario = restTemplate.getForObject(urlGithub.toString(), String.class);
 
@@ -43,8 +43,9 @@ public class RepositorioControlador {
 
 		for (Repositorio repositorio : usuario.getListaRepositorios()) {
 			if (repositorio.getNomeRepositorio().toLowerCase()
-					.equals(ObjetoJson.tentaRecuperarObjeto(jsonObj, "name").toString())) {
-				return ResponseEntity.badRequest().body("Repositório já cadastrado " + repositorio.getNomeRepositorio());
+					.equals(ObjetoJson.tentaRecuperarObjeto(jsonObj, "name").toString().toLowerCase())) {
+				return ResponseEntity.badRequest()
+						.body("Repositório já cadastrado " + repositorio.getNomeRepositorio());
 			}
 		}
 

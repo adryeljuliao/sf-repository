@@ -131,7 +131,7 @@ body {
 }
 
 .card-body {
-	padding: 10px !important;
+	padding: 0 10px !important;
 }
 
 .user-name-labels {
@@ -151,7 +151,7 @@ body {
 	border: none !important;
 }
 
-.tabs-custom ul {
+.ui-tabs-nav {
 	padding: 0 !important;
 	margin: 0 !important;
 	border: none !important;
@@ -159,16 +159,15 @@ body {
 	border-bottom: 1px solid #d3d7cf !important;
 }
 
-.tabs-custom ul li {
+.ui-tabs-nav li {
 	padding: 0 !important;
 	margin: 0 3px !important;
 	border: none !important;
 	border-bottom: none !important;
 	background: #fff !important;
-	
 }
 
-.tabs-custom ul li a {
+.ui-tabs-nav li a {
 	color: #666 !important;
 }
 
@@ -186,7 +185,6 @@ body {
 	font-weight: bold !important;
 }
 
-
 .tabs-custom ul li[aria-selected="true"] a {
 	color: #000 !important;
 	font-weight: bold !important;
@@ -197,7 +195,7 @@ body {
 	font-weight: bold !important;
 }
 
-.tabs-custom ul li a {
+.ui-tabs-nav li a {
 	padding: 16px 8px !important;
 	font-weight: normal;
 }
@@ -207,4 +205,67 @@ body {
 	font-weight: bold !important;
 	border-bottom: 2px solid #e36209;
 	cursor: pointer !important;
+}
+
+.pagina-item.active a {
+	background: blue !important;
+	color: #fff;
+}
+
+.card-title {
+	font-size: 18px;
+	font-weight: bold;
+	text-transform: uppercase;
+	margin: 5px 0 !important;
+	color: #0366d6 !important;
+}
+
+.card-description {
+	color: #999;
+}
+
+.elements {
+	margin-bottom: 20px;
+}
+
+.card {
+	height: 100%;
+}
+
+.pagination ul {
+	list-style: none;
+}
+
+.pagination ul li {
+	display: inline !important;
+}
+
+.card-header-custom {
+	padding: 10px;
+}
+
+.card-header-custom a {
+	margin: 0 !important;
+}
+
+.card-header-custom .close {
+	font-size: 15px !important;
+	line-height: 0 !important;
+}
+
+.add-repository {
+	margin-bottom: 1rem;
+	border-bottom: 1px solid #d3d7cf !important;
+}
+
+.add-repository.form-control {
+	margin: 0 !important;
+}
+
+.ui-tabs .ui-tabs-panel {
+	padding: 0 1.4em !important;
+}
+
+.link-add {
+	color: #fff !important;
 }

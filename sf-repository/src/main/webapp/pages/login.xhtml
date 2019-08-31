@@ -6,8 +6,10 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<h:outputStylesheet name="css/styles.css" />
-	<h:outputStylesheet name="bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css"
+		href="../resources/css/styles.css" />
+	<link rel="stylesheet" type="text/css"
+		href="../resources/bootstrap/css/bootstrap.css" />
 </h:head>
 <body>
 	<div class="login-container">
@@ -15,16 +17,16 @@
 			<div class="form-group">
 				<p:outputLabel for="username" value="Username" />
 				<p:inputText styleClass="form-control" id="username"
-					placeholder="Digite o nome de usuário" value="#{loginBean.usuario.nomeUsuario}" />
+					placeholder="Digite o nome de usuário"
+					value="#{loginBean.usuario.nomeUsuario}" />
 			</div>
-			<p:commandButton value="Entrar"
-				action="#{loginBean.entrar()}"
+			<p:commandButton value="Entrar" action="#{loginBean.entrar()}"
 				process="@this, @form" />
 		</h:form>
 	</div>
-	<h:outputScript library="jquery" name="jquery.min.js" />
-	<h:outputScript library="popper" name="popper.min.js" />
-	<h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
+	<script type="text/javascript" src="../resources/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="../resources/popper/popper.min.js"></script>
+	<script type="text/javascript" src="../resources/bootstrap/js/bootstrap.min.js"></script>
 
 </body>
 </html>

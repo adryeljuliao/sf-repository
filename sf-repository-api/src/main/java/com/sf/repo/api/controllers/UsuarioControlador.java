@@ -35,17 +35,17 @@ public class UsuarioControlador {
 	@PostMapping(path = "/login")
 	public ResponseEntity<Void> logar(@RequestBody UsuarioDto usuarioDto) throws ObjectNotFoundException {
 
-		RestTemplate restTemplate = new RestTemplate();
-		StringBuilder urlGithub = new StringBuilder("https://api.github.com/users");
+		Usuario usuario = usuarioService.buscarPorLogin(usuarioDto.getNomeUsuario());
 
-		urlGithub.append("/");
-		urlGithub.append(usuarioDto.getNomeUsuario());
-
-		String dadosUsuario = restTemplate.getForObject(urlGithub.toString(), String.class);
-		JSONObject jsonObj = new JSONObject(dadosUsuario);
-
-		Usuario usuario = usuarioService.buscarPorLogin(jsonObj.getString("login"));
 		if (usuario == null) {
+			RestTemplate restTemplate = new RestTemplate();
+			StringBuilder urlGithub = new StringBuilder("https://api.github.com/users");
+
+			urlGithub.append("/");
+			urlGithub.append(usuarioDto.getNomeUsuario());
+
+			String dadosUsuario = restTemplate.getForObject(urlGithub.toString(), String.class);
+			JSONObject jsonObj = new JSONObject(dadosUsuario);
 			usuario = usuarioDto.transformarObjeto(jsonObj);
 			usuarioService.salvar(usuario);
 		}
