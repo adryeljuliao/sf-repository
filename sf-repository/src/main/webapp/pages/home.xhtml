@@ -40,43 +40,44 @@
 								<div class="form-group mb-0 col-sm-12 col-md-6 col-lg-10">
 									<p:inputText styleClass="form-control"
 										placeholder="Informe o nome do repositório"
+										id="input-nome-repositorio"
 										value="#{usuarioBean.repositorioDto.nomeRepositorio}" />
 								</div>
 								<div class="col-sm-12 col-md-6 col-lg-2">
 									<p:commandLink value="Adicionar"
 										action="#{usuarioBean.cadastrarRepositorio()}" process="@form"
-										onsuccess="location.reload();"
+										update="input-nome-repositorio, loop"
+										oncomplete="location.reload(true);"
 										styleClass="btn btn-success mb-0 float-sm-right float-md-right float-lg-right link-add" />
 								</div>
 							</div>
-							<div class="row" id="loop">
-								<p:repeat value="#{usuarioBean.usuario.listaRepositorios}"
-									var="repositorio">
-									<div class="col-12 col-md-6 col-lg-6 elements">
-										<div class="card">
-											<div class="card-header-custom">
-												<p:commandLink value="#{repositorio.nomeRepositorio}"
-													styleClass="card-title" />
-												<h:commandLink action="#{usuarioBean.escolher}"
-													styleClass="close">
-													<f:setPropertyActionListener
-														target="#{usuarioBean.repositorioEscolhido}"
-														value="#{repositorio}" />
-													<span class="fa fa-times" aria-hidden="true" />
-												</h:commandLink>
-											</div>
-											<div class="card-body">
+							<p:outputPanel styleClass="row loop" id="loop">
+									<p:repeat value="#{usuarioBean.usuario.listaRepositorios}"
+										var="repositorio">
+										<div class="col-12 col-md-6 col-lg-6 elements">
+											<div class="card">
+												<div class="card-header-custom">
+													<p:commandLink value="#{repositorio.nomeRepositorio}"
+														styleClass="card-title" />
+													<p:commandLink action="#{usuarioBean.escolher}"
+														styleClass="close" oncomplete="location.reload(true);">
+														<f:setPropertyActionListener
+															target="#{usuarioBean.repositorioEscolhido}"
+															value="#{repositorio}" />
+														<span class="fa fa-times" aria-hidden="true" />
+													</p:commandLink>
+												</div>
+												<div class="card-body">
 
-												<p:outputLabel value="#{repositorio.descricao}"
-													styleClass="card-description" />
+													<p:outputLabel value="#{repositorio.descricao}"
+														styleClass="card-description" />
 
+												</div>
 											</div>
 										</div>
-									</div>
-								</p:repeat>
-							</div>
+									</p:repeat>
+							</p:outputPanel>
 							<div class="pagination-custom"></div>
-
 						</h:form>
 					</p:tab>
 				</p:tabView>

@@ -26,6 +26,15 @@ public class RepositorioControlador {
 	@PutMapping(value = "{login}")
 	public ResponseEntity<?> cadastrarRepositorio(@RequestBody RepositorioDto repositorioDto,
 			@PathVariable String login) {
+		Usuario usuario = usuarioServico.buscarPorLogin(login);
+
+		for (Repositorio repositorio : usuario.getListaRepositorios()) {
+			if (repositorio.getNomeRepositorio().toLowerCase()
+					.equals(repositorioDto.getNomeRepositorio().toLowerCase())) {
+				return ResponseEntity.badRequest()
+						.body("Repositório já cadastrado " + repositorio.getNomeRepositorio());
+			}
+		}
 
 		RestTemplate restTemplate = new RestTemplate();
 		StringBuilder urlGithub = new StringBuilder("https://api.github.com/repos");
@@ -35,24 +44,17 @@ public class RepositorioControlador {
 		urlGithub.append(
 				ObjetoJson.tentaRecuperarObjeto(new JSONObject(repositorioDto), "nomeRepositorio").toString().trim());
 
-		String dadosUsuario = restTemplate.getForObject(urlGithub.toString(), String.class);
+		try {
+			String dadosUsuario = restTemplate.getForObject(urlGithub.toString(), String.class);
+			JSONObject jsonObj = new JSONObject(dadosUsuario);
 
-		JSONObject jsonObj = new JSONObject(dadosUsuario);
-
-		Usuario usuario = usuarioServico.buscarPorLogin(login);
-
-		for (Repositorio repositorio : usuario.getListaRepositorios()) {
-			if (repositorio.getNomeRepositorio().toLowerCase()
-					.equals(ObjetoJson.tentaRecuperarObjeto(jsonObj, "name").toString().toLowerCase())) {
-				return ResponseEntity.badRequest()
-						.body("Repositório já cadastrado " + repositorio.getNomeRepositorio());
-			}
+			Repositorio repositorio = criarObjRepositorio(jsonObj);
+			usuario.adicionarRepositorio(repositorio);
+			usuario = usuarioServico.atualizar(usuario);
+			return ResponseEntity.ok().body("Repositório adicionado com sucesso");
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().body("error");
 		}
-
-		Repositorio repositorio = criarObjRepositorio(jsonObj);
-		usuario.adicionarRepositorio(repositorio);
-		usuario = usuarioServico.atualizar(usuario);
-		return ResponseEntity.ok().body("Repositório adicionado com sucesso");
 
 	}
 
