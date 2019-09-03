@@ -4,7 +4,7 @@ $(document).ready(function () {
 
 const renderizarComponentes = () => {
 	let numeroItens = $('.loop .elements').length;
-	if(numeroItens > 6){
+	if(numeroItens > 4){
 		paginator(numeroItens);
 	}
 }
@@ -81,14 +81,15 @@ const paginacao = (numeroItens) => {
 		console.log(paginaAtual);
 	});
 }
+
 const paginator = (numeroItens) => {
-	let limitePorPagina = 8;
+	let limitePorPagina = 4;
 	let paginaAtual = 1;
 	$(`.loop .elements:gt(${limitePorPagina - 1})`).hide();
 	let totalPaginas = Math.ceil(numeroItens / limitePorPagina);
 	$('.pagination-custom').append(`<ul class="pagination justify-content-center"></ul>`);
-	$('.pagination').append(`<li id="prev-item" class="page-item"><a class="page-link ui-state-disabled" href="javascript:void(0)">Anterior</a></li>`);
-	$('.pagination').append(`<li id="prox-item" class="page-item"><a class="page-link ui-state-disabled" href="javascript:void(0)">Próximo</a></li>`);
+	$('.pagination').append(`<li id="prev-item" class="page-item"><a class="page-link" href="javascript:void(0)">Anterior</a></li>`);
+	$('.pagination').append(`<li id="prox-item" class="page-item"><a class="page-link" href="javascript:void(0)">Próximo</a></li>`);
 
 	if (paginaAtual === 1 && totalPaginas === 1) {
 		$('#prev-item').addClass('ui-state-disabled');
