@@ -40,7 +40,7 @@ public class Repositorio implements Serializable {
 	}
 
 	public String getDescricao() {
-		if(descricao.equals("null")) {
+		if ("".equals(descricao)) {
 			return "Sem descrição";
 		}
 		return descricao;

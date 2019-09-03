@@ -41,7 +41,8 @@
 									<p:inputText styleClass="form-control"
 										placeholder="Informe o nome do repositório"
 										id="input-nome-repositorio"
-										value="#{usuarioBean.repositorioDto.nomeRepositorio}" />
+										value="#{usuarioBean.repositorioDto.nomeRepositorio}"
+										onkeypress="if (event.keyCode == 13) { return false; }" />
 								</div>
 								<div class="col-sm-12 col-md-6 col-lg-2">
 									<p:commandLink value="Adicionar"
@@ -52,31 +53,32 @@
 								</div>
 							</div>
 							<p:outputPanel styleClass="row loop" id="loop">
-									<p:repeat value="#{usuarioBean.usuario.listaRepositorios}"
-										var="repositorio">
-										<div class="col-12 col-md-6 col-lg-6 elements">
-											<div class="card">
-												<div class="card-header-custom">
-													<p:commandLink value="#{repositorio.nomeRepositorio}"
-														styleClass="card-title" />
-													<p:commandLink action="#{usuarioBean.escolher}"
-														styleClass="close" oncomplete="location.reload(true);">
-														<f:setPropertyActionListener
-															target="#{usuarioBean.repositorioEscolhido}"
-															value="#{repositorio}" />
-														<span class="fa fa-times" aria-hidden="true" />
-													</p:commandLink>
-												</div>
-												<div class="card-body">
+								<p:repeat value="#{usuarioBean.usuario.listaRepositorios}"
+									var="repositorio">
+									<div class="col-12 col-md-6 col-lg-6 elements">
+										<div class="card">
+											<div class="card-header-custom">
+												<p:commandLink value="#{repositorio.nomeRepositorio}"
+													styleClass="card-title" />
+												<p:commandLink action="#{usuarioBean.removerRepositorio}"
+													styleClass="close" oncomplete="location.reload(true);">
+													<f:setPropertyActionListener
+														target="#{usuarioBean.repositorioEscolhido}"
+														value="#{repositorio}" />
+													<span class="fa fa-times" aria-hidden="true" />
+												</p:commandLink>
+											</div>
+											<div class="card-body">
 
-													<p:outputLabel value="#{repositorio.descricao}"
-														styleClass="card-description" />
+												<p:outputLabel value="#{repositorio.descricao}"
+													styleClass="card-description" />
 
-												</div>
 											</div>
 										</div>
-									</p:repeat>
+									</div>
+								</p:repeat>
 							</p:outputPanel>
+
 							<div class="pagination-custom"></div>
 						</h:form>
 					</p:tab>

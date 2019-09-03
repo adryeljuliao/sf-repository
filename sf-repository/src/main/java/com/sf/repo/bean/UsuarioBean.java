@@ -33,17 +33,32 @@ public class UsuarioBean {
 	}
 
 	public void cadastrarRepositorio() {
-		String url = "http://localhost:3000/usuarios/repositorios/{login}";
+		String url = "http://localhost:3000/usuarios/repositorios/{login}/{nameRepository}";
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("login", usuario.getLogin());
+		params.put("nameRepository", repositorioDto.getNomeRepositorio());
 		try {
 			RestTemplate restTemplate = new RestTemplate();
-			restTemplate.put(url.toString(), repositorioDto, params);
+			restTemplate.put(url.toString(), repositorioDto.getNomeRepositorio(), params);
+		} catch (Exception e) {
+			System.err.println("error " + e.getMessage());
+		}
+		
+		limparCampos();
+	}
+	
+	public void removerRepositorio() {
+		String url = "http://localhost:3000/usuarios/repositorios/{login}/{nameRepository}";
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("login", usuario.getLogin());
+		params.put("nameRepository", repositorioEscolhido.getNomeRepositorio());
+		try {
+			RestTemplate restTemplate = new RestTemplate();
+			restTemplate.delete(url.toString(), params);
 		} catch (Exception e) {
 			System.err.println("error");
 		}
 		
-		limparCampos();
 	}
 
 	public void limparCampos() {
