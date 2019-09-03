@@ -33,13 +33,12 @@ public class UsuarioBean {
 	}
 
 	public void cadastrarRepositorio() {
-		String url = "http://localhost:3000/usuarios/repositorios/{login}/{nameRepository}";
+		String url = "http://localhost:3000/usuarios/repositorios/{login}";
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("login", usuario.getLogin());
-		params.put("nameRepository", repositorioDto.getNomeRepositorio());
 		try {
 			RestTemplate restTemplate = new RestTemplate();
-			restTemplate.put(url.toString(), repositorioDto.getNomeRepositorio(), params);
+			restTemplate.put(url.toString(), repositorioDto, params);
 		} catch (Exception e) {
 			System.err.println("error " + e.getMessage());
 		}
