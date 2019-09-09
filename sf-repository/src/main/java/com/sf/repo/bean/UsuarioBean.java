@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 
 import org.springframework.web.client.RestTemplate;
 
@@ -15,7 +16,7 @@ import com.sf.repo.model.usuario.Repositorio;
 import com.sf.repo.model.usuario.Usuario;
 import com.sf.repo.util.SessionContext;
 
-@RequestScoped
+@ViewScoped
 @ManagedBean
 public class UsuarioBean {
 
@@ -24,10 +25,10 @@ public class UsuarioBean {
 	private UsuarioDto objDto;
 	private RepositorioDto repositorioDto;
 	private static final String URL_FIND_USER = "http://localhost:3000/usuarios/{login}";
+
 	@PostConstruct
 	public void iniciar() {
 		objDto = (UsuarioDto) SessionContext.getValueObjOnSession("usuarioLogado");
-		
 		repositorioEscolhido = new Repositorio();
 		repositorioDto = new RepositorioDto();
 	}
@@ -42,10 +43,10 @@ public class UsuarioBean {
 		} catch (Exception e) {
 			System.err.println("error " + e.getMessage());
 		}
-		
+
 		limparCampos();
 	}
-	
+
 	public void removerRepositorio() {
 		String url = "http://localhost:3000/usuarios/repositorios/{login}/{nameRepository}";
 		Map<String, String> params = new HashMap<String, String>();
@@ -57,7 +58,7 @@ public class UsuarioBean {
 		} catch (Exception e) {
 			System.err.println("error");
 		}
-		
+
 	}
 
 	public void limparCampos() {
@@ -72,6 +73,17 @@ public class UsuarioBean {
 
 	public void escolher() {
 		System.out.println("escolheu " + repositorioEscolhido.getNomeRepositorio());
+	}
+
+	public void editarDescricaoRepositorio() {
+		String url = "http://localhost:3000/usuarios/repositorios/{login}/{nameRepository}";
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("login", usuario.getLogin());
+		params.put("nameRepository", repositorioEscolhido.getNomeRepositorio());
+		String teste = "{'descricao': '" + repositorioEscolhido.getDescricao().trim() + "'}";
+
+		RestTemplate restTemplate = new RestTemplate();
+		restTemplate.put(url.toString(), teste, params);
 	}
 
 	public Usuario getUsuario() {
@@ -89,6 +101,10 @@ public class UsuarioBean {
 
 	public void setRepositorioEscolhido(Repositorio repositorioEscolhido) {
 		this.repositorioEscolhido = repositorioEscolhido;
+	}
+
+	public Repositorio getRepositorioEscolhido() {
+		return repositorioEscolhido;
 	}
 
 	public RepositorioDto getRepositorioDto() {
