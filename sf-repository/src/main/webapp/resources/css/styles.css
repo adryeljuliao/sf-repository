@@ -113,15 +113,21 @@ body {
 }
 
 .navbar-custom .navbar-nav li a {
-	text-decoration: none;
-	color: #fff;
-	padding: 3px 0;
-	font-weight: bold;
-	outline: none;
+	text-decoration: none !important;
+	color: #fff !important;
+	padding: 3px 0 !important;
+	font-weight: bold !important;
+	outline: none !important;
 }
 
 .navbar-custom .navbar-nav li a:hover {
-	color: #d9d9d9;
+	color: #d9d9d9 !important;
+}
+
+#logout {
+	display: flex;
+	flex-direction: row-reverse;
+	line-height: 100%;
 }
 
 .card-text {
@@ -213,7 +219,7 @@ body {
 }
 
 .card-title {
-	font-size: 18px;
+	font-size: 16px !important;
 	font-weight: bold;
 	text-transform: uppercase;
 	margin: 5px 0 !important;
@@ -222,6 +228,15 @@ body {
 
 .card-description {
 	color: #999;
+	font-size: 14px !important;
+}
+
+.card-language {
+	font-size: 12px !important;
+}
+
+.card-language label {
+	padding: 0 5px;
 }
 
 .elements {

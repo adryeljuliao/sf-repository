@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import org.primefaces.json.JSONObject;
 import org.springframework.web.client.RestTemplate;
@@ -49,6 +51,12 @@ public class LoginBean implements Serializable {
 			return redirecionarHome();
 		}
 		return "";
+	}
+
+	public String sair() {
+		HttpSession sessao = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+		sessao.invalidate();
+		return "login.xhtml?faces-redirect=true";
 	}
 
 	public void limparCampo() {
